@@ -24,7 +24,6 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
         'verified' => $verificado = $faker->randomElement([User::USUARIO_VERIFICADO, User::USUARIO_NO_VERIFICADO]),
@@ -66,7 +65,6 @@ $factory->define(Transaction::class, function (Faker $faker) {
     $comprador = User::all()->except($vendedor->id)->random();
 
     return [
-        'name' => $faker->word,
         'quantity' => $faker->numberBetween(1, 3),
         'buyer_id' => $comprador->id,
         'product_id' => $vendedor->products->random()->id
